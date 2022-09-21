@@ -17,11 +17,20 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backgroud3 = new Component.backgroud();
         backgroud2 = new Component.backgroud();
+        backgroud4 = new Component.backgroud();
+        backgroud5 = new Component.backgroud();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        backgroud2.setImage(new javax.swing.ImageIcon(getClass().getResource("/piz/parrot.jpg"))); // NOI18N
+        backgroud3.setImage(new javax.swing.ImageIcon(getClass().getResource("/piz/002.png"))); // NOI18N
+
+        backgroud2.setImage(new javax.swing.ImageIcon(getClass().getResource("/piz/007.jpg"))); // NOI18N
+
+        backgroud4.setImage(new javax.swing.ImageIcon(getClass().getResource("/piz/parrot.jpg"))); // NOI18N
+
+        backgroud5.setImage(new javax.swing.ImageIcon(getClass().getResource("/piz/008.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -29,14 +38,27 @@ public class NewJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(backgroud2, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(backgroud4, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+                    .addComponent(backgroud3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backgroud2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(backgroud5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(backgroud2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 107, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backgroud2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                    .addComponent(backgroud3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backgroud4, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(backgroud5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,5 +98,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Component.backgroud backgroud2;
+    private Component.backgroud backgroud3;
+    private Component.backgroud backgroud4;
+    private Component.backgroud backgroud5;
     // End of variables declaration//GEN-END:variables
 }

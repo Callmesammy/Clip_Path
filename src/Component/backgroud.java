@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -58,7 +59,7 @@ public class backgroud extends JLayeredPane {
         this.image = image;
     }
 
-    private int size = 300;
+    private int size = 600;
     private Icon image;
     private Point point = new Point(-size/2, -size/2);
     private Shape shape = new Ellipse2D.Double(0, 0, size, size);
@@ -75,25 +76,26 @@ public class backgroud extends JLayeredPane {
               int y = getY()-size/2;
               point = new Point(x, y);
               repaint();
+              revalidate();
             }
         });
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(getBackground());
-        g2.fill(new Rectangle.Double(0, 0, getWidth(), getHeight()));
+    protected void paintComponent(Graphics g3) {
+        Graphics2D gz = (Graphics2D)g3.create();
+        gz.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gz.setColor(getBackground());
+        gz.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         if (image != null) {
-            drawImage(g2);
+            drawImage(gz);
         }
         
-        g2.dispose();
-        super.paintComponent(g); 
+        gz.dispose();
+        super.paintComponent(g3); 
     }
     
-    private void drawImage (Graphics2D g2){
+    private void drawImage (Graphics2D g){
         BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g1 = img.createGraphics();
         Rectangle tan = getAutosize(image);
@@ -106,11 +108,8 @@ public class backgroud extends JLayeredPane {
         
         g1.drawImage(toIcon(image), tan.x, tan.y, tan.width, tan.height, null);
         g1.dispose();
-        g2.drawImage(img, 0, 0, null);
-        
-        
-        
-        
+        g.drawImage(img, 0, 0, null);
+          
     }
     
     private Rectangle getAutosize (Icon image){
@@ -120,7 +119,7 @@ public class backgroud extends JLayeredPane {
         int ih = image.getIconHeight();
         double xScale = (double)w/iw;
         double yScale = (double)h/ih;
-        double scale = (double) Math.max(xScale, yScale);
+        double scale = Math.max(xScale, yScale);
         int width = (int) (scale *iw);
         int height = (int) (scale *ih);
         if (width <1) {
@@ -135,8 +134,8 @@ public class backgroud extends JLayeredPane {
         return new Rectangle(x,y,width,height);
     }
     
-    private Image toIcon(Icon image){
-        return ((ImageIcon)image).getImage();
+    private Image toIcon(Icon icon){
+        return ((ImageIcon)icon).getImage();
     }
     
 }
