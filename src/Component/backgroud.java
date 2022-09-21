@@ -10,6 +10,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
@@ -58,19 +60,28 @@ public class backgroud extends JLayeredPane {
 
     private int size = 300;
     private Icon image;
-    private Point point = new Point(size/2, size/2);
+    private Point point = new Point(-size/2, -size/2);
     private Shape shape = new Ellipse2D.Double(0, 0, size, size);
     private String title = "Enter Text here";
     
     public backgroud() {
-        setOpaque(false);
+        setOpaque(true);
         setBackground(new Color(70,70,70));
         setForeground(new Color(200,200,200));
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+              int x = getX()-size/2;
+              int y = getY()-size/2;
+              point = new Point(x, y);
+              repaint();
+            }
+        });
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D)g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
         g2.fill(new Rectangle.Double(0, 0, getWidth(), getHeight()));
@@ -95,7 +106,7 @@ public class backgroud extends JLayeredPane {
         
         g1.drawImage(toIcon(image), tan.x, tan.y, tan.width, tan.height, null);
         g1.dispose();
-        g1.drawImage(img, 0, 0, null);
+        g2.drawImage(img, 0, 0, null);
         
         
         
@@ -107,8 +118,8 @@ public class backgroud extends JLayeredPane {
         int h = getHeight();
         int iw = image.getIconWidth();
         int ih = image.getIconHeight();
-        double xScale = (double) w/ih;
-        double yScale = (double) h/ih;
+        double xScale = (double)w/iw;
+        double yScale = (double)h/ih;
         double scale = (double) Math.max(xScale, yScale);
         int width = (int) (scale *iw);
         int height = (int) (scale *ih);
