@@ -1,6 +1,8 @@
 
 package Component;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -8,7 +10,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
@@ -60,6 +64,8 @@ public class backgroud extends JLayeredPane {
     
     public backgroud() {
         setOpaque(false);
+        setBackground(new Color(70,70,70));
+        setForeground(new Color(200,200,200));
     }
 
     @Override
@@ -67,7 +73,7 @@ public class backgroud extends JLayeredPane {
         Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
-        g2.fill(new Rectangle());
+        g2.fill(new Rectangle.Double(0, 0, getWidth(), getHeight()));
         if (image != null) {
             drawImage(g2);
         }
@@ -77,6 +83,22 @@ public class backgroud extends JLayeredPane {
     }
     
     private void drawImage (Graphics2D g2){
+        BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g1 = img.createGraphics();
+        Rectangle tan = getAutosize(image);
+        g1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        AffineTransform tran =g1.getTransform();
+        g1.translate(point.x, point.y);
+        g1.fill(shape);
+        g1.setComposite(AlphaComposite.SrcIn);
+        g1.setTransform(tran);
+        
+        g1.drawImage(toIcon(image), tan.x, tan.y, tan.width, tan.height, null);
+        g1.dispose();
+        g1.drawImage(img, 0, 0, null);
+        
+        
+        
         
     }
     
